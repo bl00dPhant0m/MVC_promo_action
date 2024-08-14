@@ -11,8 +11,8 @@ spring:
     name: MVC_promo_acition
   datasource:
     url: jdbc:postgresql://localhost:5432/promo_db
-    username: Kirill
-    password: 191919
+    username:
+    password:
     driver-class-name: org.postgresql.Driver
   jpa:
     database: postgresql
