@@ -1,0 +1,22 @@
+#spring.application.name=MVC_promo_acition
+#spring.datasource.username=Kirill
+#spring.datasource.password=191919
+#spring.datasource.url=jdbc:postgresql://localhost:5432/promo_db
+#spring.data.jdbc.dialect=postgresql
+#spring.datasource.driver-class-name=org.postgresql.Driver
+#spring.jpa.hibernate.ddl-auto=create
+
+spring:
+  application:
+    name: MVC_promo_acition
+  datasource:
+    url: jdbc:postgresql://localhost:5432/promo_db
+    username: Kirill
+    password: 191919
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+

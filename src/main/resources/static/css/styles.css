@@ -1,0 +1,117 @@
+/* Основные стили */
+body {
+    background-color: #e6f7ff; /* Нежно-голубой фон */
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Навигационная панель */
+.navbar {
+    background-color: #00aaff; /* Яркий синий */
+    padding: 10px 20px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #ffffff !important;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: #ffffff !important;
+    margin-right: 15px;
+    font-size: 1.1rem;
+}
+
+.nav-link:hover {
+    color: #ffdd57 !important; /* Ярко-желтый при наведении */
+}
+
+/* Контейнер таблицы */
+.table-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+    margin: 20px auto;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #00aaff;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Таблица */
+.table {
+    width: 100%;
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.table thead th {
+    background-color: #00aaff;
+    color: #ffffff;
+    border: none;
+    padding: 15px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.table tbody tr {
+    background-color: #ccf2ff; /* Светло-голубой фон */
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+}
+
+.table tbody tr:hover {
+    transform: scale(1.03);
+    background-color: #ffdd57; /* Желтый при наведении */
+}
+
+.table tbody td {
+    padding: 15px;
+    vertical-align: middle;
+    border-top: none;
+    text-align: center;
+}
+
+/* Изображение приза */
+.img-thumbnail {
+    max-height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid #00aaff; /* Синяя рамка */
+}
+
+/* Кнопки */
+.btn-primary {
+    margin-left: 10px;
+    background-color: #ffdd57;
+    border-color: #ffdd57;
+    border-radius: 20px;
+    padding: 8px 20px;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #00aaff;
+    border-color: #00aaff;
+    color: #ffffff;
+}

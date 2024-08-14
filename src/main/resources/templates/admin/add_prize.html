@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Prize</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="#">Панель управления</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin_panel}">Админ-панель</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/winners}">Список победителей</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h1 class="text-center">Добавить новый приз</h1>
+
+    <form action="/add_prize" method="post" enctype="multipart/form-data" class="mt-4">
+        <div class="form-group">
+            <label for="nameOfPrize">Название приза</label>
+            <input id="nameOfPrize" name="nameOfPrize" type="text" class="form-control" placeholder="Введите название приза">
+        </div>
+
+        <div class="form-group">
+            <label for="codes">Коды</label>
+            <textarea id="codes" name="codes" class="form-control" placeholder="Введите коды"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="file">Изображение приза</label>
+            <input id="file" name="file" type="file" class="form-control-file">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+</div>
+
+</body>
+</html>
