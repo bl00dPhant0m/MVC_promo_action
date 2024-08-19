@@ -7,14 +7,14 @@ import org.spring.mvc_promo_acition.repositories.PrizeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class PrizeService {
@@ -58,16 +58,6 @@ public class PrizeService {
     }
 
     public List<DTOPrize> convertPrizesToDTO(List<Prize> prizes) {
-//        List<DTOPrize> dtoPrizes = new ArrayList<>();
-//        for (Prize prize : prizes) {
-//            DTOPrize dtoPrize = new DTOPrize();
-//            dtoPrize.setNameOfPrize(prize.getNameOfPrize());
-//            dtoPrize.setPath(prize.getPath());
-//            dtoPrizes.add(dtoPrize);
-//        }
-//        return dtoPrizes;
-//
-//
         return prizes.stream()
                 .map(prize -> new DTOPrize(prize.getCode(), prize.getNameOfPrize()))
                 .toList();
