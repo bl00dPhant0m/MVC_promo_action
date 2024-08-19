@@ -20,6 +20,9 @@
                 <a class="nav-link" th:href="@{/admin_panel}">Админ-панель</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" th:href="@{/add_prize}">Добавить приз</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" th:href="@{/winners}">Список победителей</a>
             </li>
         </ul>
@@ -46,6 +49,11 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Добавить</button>
+
+
+        <div th:if="${successMessage}" class="alert alert-success text-center mt-3" role="alert">
+            <p th:text="${successMessage}"></p>
+        </div>
     </form>
 </div>
 

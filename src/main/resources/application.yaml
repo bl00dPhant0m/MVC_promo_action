@@ -11,12 +11,16 @@ spring:
     name: MVC_promo_acition
   datasource:
     url: jdbc:postgresql://localhost:5432/promo_db
-    username:
-    password:
+    username: Kirill
+    password: 191919
     driver-class-name: org.postgresql.Driver
   jpa:
     database: postgresql
     hibernate:
       ddl-auto: update
     show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 

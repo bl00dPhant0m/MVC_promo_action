@@ -115,3 +115,20 @@ h1 {
     border-color: #00aaff;
     color: #ffffff;
 }
+.form-control {
+    border: 2px solid #007bff;
+    border-radius: 0.25rem;
+    box-shadow: none;
+    background-color: #f1f1f1;
+    padding: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-control:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 85, 179, 0.5);
+    outline: none;
+    background-color: #eaf4ff;
+}
+

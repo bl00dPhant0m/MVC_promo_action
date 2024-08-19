@@ -1,6 +1,7 @@
 package org.spring.mvc_promo_acition.service;
 
 import jakarta.transaction.Transactional;
+import org.spring.mvc_promo_acition.entiies.DTOPrize;
 import org.spring.mvc_promo_acition.entiies.Prize;
 import org.spring.mvc_promo_acition.repositories.PrizeRepository;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,25 @@ public class PrizeService {
 
     public String pathToString(MultipartFile file) {
         String fileName = file.getOriginalFilename();
-        return "src/main/resources/static/img/" + fileName;
+        return "/img/" + fileName;
+    }
+
+    public List<DTOPrize> convertPrizesToDTO(List<Prize> prizes) {
+//        List<DTOPrize> dtoPrizes = new ArrayList<>();
+//        for (Prize prize : prizes) {
+//            DTOPrize dtoPrize = new DTOPrize();
+//            dtoPrize.setNameOfPrize(prize.getNameOfPrize());
+//            dtoPrize.setPath(prize.getPath());
+//            dtoPrizes.add(dtoPrize);
+//        }
+//        return dtoPrizes;
+//
+//
+        return prizes.stream()
+                .map(prize -> new DTOPrize(prize.getCode(), prize.getNameOfPrize()))
+                .toList();
+
+
     }
 
     public void saveSomePrizes(List<Prize> prizes) {

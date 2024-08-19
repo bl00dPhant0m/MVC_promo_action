@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правила акции</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/stylesForAdvice.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">Промо-акция</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link tooltip-text" href="#how-to-participate" data-tooltip="Как участвовать:
+                1. Купите наш товар.
+                2. Сохраните чек.
+                3. Зарегистрируйте промо-код с чека на сайте.
+                4. Заполните форму для получения.">
+                    Как участвовать
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/prizes">Призы</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/rules">Правила акции</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h1 class="mb-4 text-center">Правила акции</h1>
+    <div class="text-center">
+        <p>Для ознакомления с полными правилами акции, пожалуйста, просмотрите PDF-документ ниже.</p>
+        <a href="${fileUrl}" class="btn btn-primary btn-lg mt-3" download>Скачать правила</a>
+        <embed src="${fileUrl}" type="application/pdf" width="100%" height="600px" />
+    </div>
+</div>
+</body>
+</html>
