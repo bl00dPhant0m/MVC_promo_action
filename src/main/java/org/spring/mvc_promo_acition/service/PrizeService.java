@@ -1,10 +1,11 @@
 package org.spring.mvc_promo_acition.service;
 
 import jakarta.transaction.Transactional;
-import org.spring.mvc_promo_acition.entiies.DTOPrize;
+import org.spring.mvc_promo_acition.dto.PrizeDTO;
 import org.spring.mvc_promo_acition.entiies.Prize;
 import org.spring.mvc_promo_acition.repositories.PrizeRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -13,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -57,9 +59,9 @@ public class PrizeService {
         return "/img/" + fileName;
     }
 
-    public List<DTOPrize> convertPrizesToDTO(List<Prize> prizes) {
+    public List<PrizeDTO> convertPrizesToDTO(List<Prize> prizes) {
         return prizes.stream()
-                .map(prize -> new DTOPrize(prize.getCode(), prize.getNameOfPrize()))
+                .map(prize -> new PrizeDTO(prize.getCode(), prize.getNameOfPrize()))
                 .toList();
 
 
@@ -78,8 +80,47 @@ public class PrizeService {
 //        }
 //    }
 
+    public Prize getPrizeByPromoCode(String promoCode) {
+        return prizeRepository.findByCode(promoCode);
+    }
+
+    @Transactional
+    public List<PrizeDTO> getAllUniquePrizes(){
+        return prizeRepository.findAllUniquePrizes();
+    }
+
     @Transactional
     public void editStatusById(long id) {
         prizeRepository.updatePrizeStatusById(id);
+    }
+
+    public List<Prize> sortPrizes(String sort) {
+        List<Prize> prizes = prizeRepository.findAll();
+        if(sort != null){
+            if ("name".equals(sort)) {
+                prizes = prizes.stream()
+                        .sorted(Comparator.comparing(Prize::getNameOfPrize))
+                        .toList();
+            } else if ("status".equals(sort)) {
+                prizes = prizes.stream()
+                        .sorted(Comparator.comparing(Prize::isStatus).reversed())
+                        .toList();
+            }
+        }
+        return prizes;
+    }
+
+    public Prize getPrizeById(long id) {
+        return prizeRepository.findById(id).get();
+    }
+
+    public void saveOnePrize(Prize prize,
+                             int prizePhone,
+                             String prizeEmail,
+                             String prizeNameOfWinner) {
+        prize.setEmailOfWinner(prizeEmail);
+        prize.setNameOfPrize(prizeNameOfWinner);
+        prize.setTelephoneNumberOfWinner(prizePhone);
+        prizeRepository.save(prize);
     }
 }

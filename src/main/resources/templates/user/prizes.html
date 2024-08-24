@@ -1,10 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Список призов</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">Промо-акция</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link tooltip-text" href="#how-to-participate" data-tooltip="Как участвовать:
+                1. Купите наш товар.
+                2. Сохраните чек.
+                3. Зарегистрируйте промо-код с чека на сайте.
+                4. Заполните форму для получения.">
+                    Как участвовать
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/prizes">Призы</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/rules">Правила акции</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container-fluid table-container">
+    <h1>Список призов</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Название приза</th>
+            <th>Изображение</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="prize:${prizes}">
+            <td th:text="${prize.nameOfPrize}"></td>
+            <td>
+                <img th:src="${prize.path}" alt="Изображение приза" class="img-thumbnail"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

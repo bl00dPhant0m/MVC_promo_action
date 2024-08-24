@@ -6,6 +6,24 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .filter-form{
+            display: flex;
+            justify-content: center;
+            align-content: center;
+        }
+        .filter-form input[type="text"] {
+            padding: 5px;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        .filter-form button {
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
@@ -28,6 +46,14 @@
         </ul>
     </div>
 </nav>
+
+<form class="filter-form" action="/winners" method="get">
+    <select id="sort" name="sort">
+        <option value="status">Фильтрация по статусу</option>
+        <option value="name">Фильтрация по имени</option>
+    </select>
+    <button type="submit">Применить сортировку</button>
+</form>
 
 <div class="container-fluid table-container">
     <h1>Список призов</h1>

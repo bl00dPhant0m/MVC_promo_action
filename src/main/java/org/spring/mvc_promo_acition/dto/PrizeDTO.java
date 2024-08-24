@@ -1,4 +1,4 @@
-package org.spring.mvc_promo_acition.entiies;
+package org.spring.mvc_promo_acition.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DTOPrize {
+public class PrizeDTO {
     private String nameOfPrize;
     private String path;
 }
