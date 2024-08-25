@@ -2,67 +2,90 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Добавление победителя</title>
+    <title>Добавление данных для получения приза</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="css/styles.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-        .form-group img {
-            max-width: 100%;
+        .prize-image {
+            width: 300px;
             height: auto;
+            max-height: 200px;
         }
-        .btn {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
+
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
         }
-        .btn:hover {
-            background-color: #45a049;
+
+        .form-container h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #00aaff;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-<h1>Добавление победителя</h1>
+<!-- Навигационная панель -->
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">Промо-акция</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link tooltip-text" href="#how-to-participate" data-tooltip="Как участвовать:
+                    1. Купите наш товар.
+                    2. Сохраните чек.
+                    3. Зарегистрируйте промо-код с чека на сайте.
+                    4. Заполните форму для получения.">
+                    Как участвовать
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/prizes">Призы</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/rules">Правила акции</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-<!-- Отображение названия приза -->
-<h2 th:text="${prizeName}">Название приза</h2>
+<div class="container">
+    <h1 class="text-center mb-4">Ваш приз: <span th:text="${prizeName}">название приза</span>. Поздравляем с выигрышем!</h1>
 
-<!-- Отображение картинки приза -->
-<div class="form-group">
-    <img th:src="@{${prizeImagePath}}" alt="Prize Image">
+    <div class="text-center mb-4">
+        <img th:src="@{${prizeImagePath}}" alt="Prize Image" class="img-thumbnail prize-image">
+    </div>
+
+    <div class="form-container">
+        <h3>Введите данные для получения приза</h3>
+
+        <form th:action="@{/form-for-winners}" method="post">
+            <div class="form-group">
+                <label for="name">ФИО:</label>
+                <input type="text" id="name" name="prizeNameOfWinner" class="form-control" required>
+                <input type="hidden" th:value="${prizeID}" name="prizeID">
+            </div>
+            <div class="form-group">
+                <label for="phone">Телефон:</label>
+                <input type="number" id="phone" name="prizePhone" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Почта:</label>
+                <input type="email" id="email" name="prizeEmail" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить данные</button>
+        </form>
+
+    </div>
 </div>
-
-<!-- Форма для ввода данных -->
-<form th:action="@{/addWinner}" method="post">
-    <div class="form-group">
-        <label for="name">Имя:</label>
-        <input type="text" id="name" name="prizeNameOfWinner" required>
-        <input type="hidden" th:value="${prizeID}" name="prizeID" required>
-    </div>
-    <div class="form-group">
-        <label for="phone">Телефон:</label>
-        <input type="text" id="phone" name="prizePhone" required>
-    </div>
-    <div class="form-group">
-        <label for="email">Почта:</label>
-        <input type="email" id="email" name="prizeEmail" required>
-    </div>
-    <button type="submit" class="btn">Добавить победителя</button>
-</form>
 </body>
 </html>

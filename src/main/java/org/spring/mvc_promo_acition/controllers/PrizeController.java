@@ -38,9 +38,8 @@ public class PrizeController {
         prizeService.saveImg(path, file);
 
 
-        String[] codesArray = codes.split("[ ,;]+");
+        String[] codesArray = prizeService.parseCodes(codes);
         String pathImg = prizeService.pathToString(file);
-        System.out.println(pathImg);
 
         List<Prize> prizes = prizeService.createPrizes(nameOfPrize, codesArray,pathImg);
         prizeService.saveSomePrizes(prizes);
@@ -92,19 +91,19 @@ public class PrizeController {
                                 Model model) {
 
         if(promoCode == null){
-            //добавить сообщение что пустой код
+            model.addAttribute("info", "Поле не должно быть пустым.");
             return "admin/promo-code";
         }
 
         Prize prize = prizeService.getPrizeByPromoCode(promoCode);
         if(prize == null){
-            //добавить сообщение код не действительный
-            return "admin/promo-code";
+            model.addAttribute("info", "Код не действительный.");
+            return "user/promo-code";
         }
 
         if (prize.getFullNameOfWinner() != null){
-            //коментарий код уже активирован
-            return "admin/promo-code";
+            model.addAttribute("info", "Код уже активирован.");
+            return "user/promo-code";
         }
         model.addAttribute("prizeID", prize.getId());
         model.addAttribute("prizeName", prize.getNameOfPrize());
@@ -113,20 +112,27 @@ public class PrizeController {
         return "user/form-for-winners";
     }
 
-    @PostMapping("/form-for-winners")
-    public String formForWinnersPost(@RequestParam long prizeId,
-                                     @RequestParam int prizePhone,
-                                     @RequestParam String prizeEmail,
-                                     @RequestParam String prizeNameOfWinner,
+    @PostMapping(value = "/form-for-winners")
+    public String formForWinnersPost(@RequestParam("prizeID") long prizeId,
+                                     @RequestParam("prizePhone") long prizePhone,
+                                     @RequestParam("prizeEmail") String prizeEmail,
+                                     @RequestParam("prizeNameOfWinner") String prizeNameOfWinner,
                                      Model model){
+        System.out.println("Received prizeId: " + prizeId);
+        System.out.println("Received prizePhone: " + prizePhone);
+        System.out.println("Received prizeEmail: " + prizeEmail);
+        System.out.println("Received prizeNameOfWinner: " + prizeNameOfWinner);
+
         Prize prize = prizeService.getPrizeById(prizeId);
         prizeService.saveOnePrize(prize, prizePhone, prizeEmail, prizeNameOfWinner);
         model.addAttribute("name", prizeNameOfWinner);
         model.addAttribute("phone", prizePhone);
 
-        return "user/return";
+        return "user/info";
     }
-    //
 
-
+    @GetMapping(value = "/info")
+    public String infoGet(Model model) {
+        return "user/info";
+    }
 }

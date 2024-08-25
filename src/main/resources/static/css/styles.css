@@ -1,6 +1,6 @@
 /* Основные стили */
 body {
-    background-color: #e6f7ff; /* Нежно-голубой фон */
+    background-color: #e6f7ff;
     font-family: 'Roboto', sans-serif;
     color: #333;
     margin: 0;
@@ -10,26 +10,25 @@ body {
     flex-direction: column;
 }
 
-/* Навигационная панель */
 .navbar {
-    background-color: #00aaff; /* Яркий синий */
+    background-color: #00aaff;
     padding: 10px 20px;
 }
 
 .navbar-brand {
     font-weight: bold;
-    color: #ffffff !important;
+    color: #ffffff;
     font-size: 1.5rem;
 }
 
 .nav-link {
-    color: #ffffff !important;
+    color: #ffffff;
     margin-right: 15px;
     font-size: 1.1rem;
 }
 
 .nav-link:hover {
-    color: #ffdd57 !important; /* Ярко-желтый при наведении */
+    color: #ffdd57;
 }
 
 /* Контейнер таблицы */
@@ -81,7 +80,7 @@ h1 {
 
 .table tbody tr:hover {
     transform: scale(1.03);
-    background-color: #ffdd57; /* Желтый при наведении */
+    background-color: #ffdd57;
 }
 
 .table tbody td {
@@ -96,7 +95,7 @@ h1 {
     max-height: 100px;
     object-fit: cover;
     border-radius: 5px;
-    border: 2px solid #00aaff; /* Синяя рамка */
+    border: 2px solid #00aaff;
 }
 
 /* Кнопки */
@@ -115,20 +114,3 @@ h1 {
     border-color: #00aaff;
     color: #ffffff;
 }
-.form-control {
-    border: 2px solid #007bff;
-    border-radius: 0.25rem;
-    box-shadow: none;
-    background-color: #f1f1f1;
-    padding: 10px;
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.form-control:focus {
-    border-color: #0056b3;
-    box-shadow: 0 0 5px rgba(0, 85, 179, 0.5);
-    outline: none;
-    background-color: #eaf4ff;
-}
-

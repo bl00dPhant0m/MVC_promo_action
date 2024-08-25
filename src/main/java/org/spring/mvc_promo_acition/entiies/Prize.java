@@ -24,7 +24,7 @@ public class Prize {
 
     private String fullNameOfWinner;
 
-    private int telephoneNumberOfWinner;
+    private long telephoneNumberOfWinner;
 
     private String emailOfWinner;
 

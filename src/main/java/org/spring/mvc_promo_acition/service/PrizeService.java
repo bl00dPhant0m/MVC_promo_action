@@ -25,6 +25,10 @@ public class PrizeService {
         this.prizeRepository = prizeRepository;
     }
 
+    public String[] parseCodes(String codes) {
+        return codes.split("[ ,;]+");
+    }
+
     public List<Prize> createPrizes(String name, String [] promoCodes, String pathImg) {
         List<Prize> prizes = new ArrayList<>();
 
@@ -115,11 +119,11 @@ public class PrizeService {
     }
 
     public void saveOnePrize(Prize prize,
-                             int prizePhone,
+                             long prizePhone,
                              String prizeEmail,
                              String prizeNameOfWinner) {
         prize.setEmailOfWinner(prizeEmail);
-        prize.setNameOfPrize(prizeNameOfWinner);
+        prize.setFullNameOfWinner(prizeNameOfWinner);
         prize.setTelephoneNumberOfWinner(prizePhone);
         prizeRepository.save(prize);
     }
