@@ -1,12 +1,16 @@
 package org.spring.mvc_promo_acition.controllers;
 
+import jakarta.validation.Valid;
 import org.spring.mvc_promo_acition.dto.PrizeDTO;
+import org.spring.mvc_promo_acition.dto.PrizeForAdmin;
 import org.spring.mvc_promo_acition.entiies.Prize;
 import org.spring.mvc_promo_acition.repositories.PrizeRepository;
 import org.spring.mvc_promo_acition.service.PrizeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,23 +29,28 @@ public class PrizeController {
     }
 
     @GetMapping(value = "/add_prize")
-    public String addPrizeGet() {
+    public String addPrizeGet(Model model) {
+        model.addAttribute("prizeForAdmin", new PrizeForAdmin());
         return "admin/add_prize";
     }
 
     @PostMapping(value = "/add_prize")
-    public String addPrizePost(@RequestParam String nameOfPrize,
-                               @RequestParam String codes,
-                               @RequestParam MultipartFile file,
+    public String addPrizePost(@Valid @ModelAttribute("prizeForAdmin") PrizeForAdmin prize,
+                               BindingResult bindingResult,
                                Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("prizeForAdmin", prize);
+            return "admin/add_prize";
+        }
+        MultipartFile file = prize.getFile();
         Path path = prizeService.getPath(file);
         prizeService.saveImg(path, file);
 
 
-        String[] codesArray = prizeService.parseCodes(codes);
+        String[] codesArray = prizeService.parseCodes(prize.getCodes());
         String pathImg = prizeService.pathToString(file);
 
-        List<Prize> prizes = prizeService.createPrizes(nameOfPrize, codesArray,pathImg);
+        List<Prize> prizes = prizeService.createPrizes(prize.getNameOfPrize(), codesArray,pathImg);
         prizeService.saveSomePrizes(prizes);
 
         model.addAttribute("successMessage", "Приз добавлен!");
@@ -118,10 +127,7 @@ public class PrizeController {
                                      @RequestParam("prizeEmail") String prizeEmail,
                                      @RequestParam("prizeNameOfWinner") String prizeNameOfWinner,
                                      Model model){
-        System.out.println("Received prizeId: " + prizeId);
-        System.out.println("Received prizePhone: " + prizePhone);
-        System.out.println("Received prizeEmail: " + prizeEmail);
-        System.out.println("Received prizeNameOfWinner: " + prizeNameOfWinner);
+
 
         Prize prize = prizeService.getPrizeById(prizeId);
         prizeService.saveOnePrize(prize, prizePhone, prizeEmail, prizeNameOfWinner);
@@ -132,7 +138,7 @@ public class PrizeController {
     }
 
     @GetMapping(value = "/info")
-    public String infoGet(Model model) {
+    public String infoGet() {
         return "user/info";
     }
 }

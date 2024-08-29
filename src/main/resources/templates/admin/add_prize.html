@@ -32,20 +32,24 @@
 <div class="container mt-4">
     <h1 class="text-center">Добавить новый приз</h1>
 
-    <form action="/add_prize" method="post" enctype="multipart/form-data" class="mt-4">
+    <form action="/add_prize" method="post" th:object="${prizeForAdmin}" enctype="multipart/form-data" class="mt-4">
         <div class="form-group">
             <label for="nameOfPrize">Название приза</label>
-            <input id="nameOfPrize" name="nameOfPrize" type="text" class="form-control" placeholder="Введите название приза">
+            <input id="nameOfPrize" name="nameOfPrize" th:field="*{prizeForAdmin.nameOfPrize}" type="text" class="form-control" placeholder="Введите название приза">
+            <div th:if="${#fields.hasErrors('nameOfPrize')}" th:errors="*{prizeForAdmin.nameOfPrize}"></div>
         </div>
 
         <div class="form-group">
             <label for="codes">Коды</label>
-            <textarea id="codes" name="codes" class="form-control" placeholder="Введите коды"></textarea>
+            <textarea id="codes" name="codes" th:field="*{prizeForAdmin.codes}" class="form-control" placeholder="Введите коды, разделенные запятыми или пробелами"></textarea>
+            <small class="form-text text-muted">Пример: code1, code2, code3 или code1 code2 code3</small>
+            <div th:if="${#fields.hasErrors('codes')}" th:errors="*{prizeForAdmin.codes}"></div>
         </div>
 
         <div class="form-group">
             <label for="file">Изображение приза</label>
-            <input id="file" name="file" type="file" class="form-control-file">
+            <input id="file" name="file" type="file" th:field="*{prizeForAdmin.file}" class="form-control-file">
+            <div th:if="${#fields.hasErrors('file')}" th:errors="*{prizeForAdmin.file}"></div>
         </div>
 
         <button type="submit" class="btn btn-primary">Добавить</button>
