@@ -3,6 +3,7 @@ package org.spring.mvc_promo_acition.controllers;
 import jakarta.validation.Valid;
 import org.spring.mvc_promo_acition.dto.PrizeDTO;
 import org.spring.mvc_promo_acition.dto.PrizeForAdmin;
+import org.spring.mvc_promo_acition.dto.PrizeForUser;
 import org.spring.mvc_promo_acition.entiies.Prize;
 import org.spring.mvc_promo_acition.repositories.PrizeRepository;
 import org.spring.mvc_promo_acition.service.PrizeService;
@@ -114,25 +115,36 @@ public class PrizeController {
             model.addAttribute("info", "Код уже активирован.");
             return "user/promo-code";
         }
-        model.addAttribute("prizeID", prize.getId());
-        model.addAttribute("prizeName", prize.getNameOfPrize());
-        model.addAttribute("prizeImagePath", prize.getPath());
 
+
+
+        return "redirect:/form-for-winners?code=" + prize.getCode();
+    }
+
+    @GetMapping(value = "/form-for-winners")
+    public String formForWinnersGet(@RequestParam("code") String code,
+                                    Model model) {
+        Prize prize = prizeService.getPrizeByPromoCode(code);
+        model.addAttribute("prize", prize);
         return "user/form-for-winners";
     }
 
+
+
+
     @PostMapping(value = "/form-for-winners")
-    public String formForWinnersPost(@RequestParam("prizeID") long prizeId,
-                                     @RequestParam("prizePhone") long prizePhone,
-                                     @RequestParam("prizeEmail") String prizeEmail,
-                                     @RequestParam("prizeNameOfWinner") String prizeNameOfWinner,
+    public String formForWinnersPost(@Valid @ModelAttribute("prize") Prize prize,
+                                     BindingResult bindingResult,
                                      Model model){
 
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("prize", prize);
+            return "user/form-for-winners";
+        }
 
-        Prize prize = prizeService.getPrizeById(prizeId);
-        prizeService.saveOnePrize(prize, prizePhone, prizeEmail, prizeNameOfWinner);
-        model.addAttribute("name", prizeNameOfWinner);
-        model.addAttribute("phone", prizePhone);
+        prizeService.saveOnePrize(prize);
+        model.addAttribute("name", prize.getFullNameOfWinner());
+        model.addAttribute("phone", prize.getTelephoneNumberOfWinner());
 
         return "user/info";
     }

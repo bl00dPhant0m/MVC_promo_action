@@ -32,7 +32,6 @@
     </style>
 </head>
 <body>
-<!-- Навигационная панель -->
 <nav class="navbar navbar-expand-lg">
     <a class="navbar-brand" href="/">Промо-акция</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,33 +58,37 @@
     </div>
 </nav>
 
-<div class="container">
-    <h1 class="text-center mb-4">Ваш приз: <span th:text="${prizeName}">название приза</span>. Поздравляем с выигрышем!</h1>
+<div class="container" th:object="${prize}">
+    <h1 class="text-center mb-4">Ваш приз: <span th:text="${prize.nameOfPrize}">название приза</span>. Поздравляем с выигрышем!</h1>
 
     <div class="text-center mb-4">
-        <img th:src="@{${prizeImagePath}}" alt="Prize Image" class="img-thumbnail prize-image">
+        <img th:src="@{${prize.path}}" alt="Prize Image" class="img-thumbnail prize-image">
     </div>
 
     <div class="form-container">
         <h3>Введите данные для получения приза</h3>
 
-        <form th:action="@{/form-for-winners}" method="post">
+        <form th:action="@{/form-for-winners}" th:object="${prize}" method="post">
             <div class="form-group">
                 <label for="name">ФИО:</label>
-                <input type="text" id="name" name="prizeNameOfWinner" class="form-control" required>
-                <input type="hidden" th:value="${prizeID}" name="prizeID">
+                <input type="text" id="name" th:field="*{fullNameOfWinner}" class="form-control" required>
+                <div th:if="${#fields.hasErrors('fullNameOfWinner')}" th:errors="*{fullNameOfWinner}"></div>
             </div>
             <div class="form-group">
                 <label for="phone">Телефон:</label>
-                <input type="number" id="phone" name="prizePhone" class="form-control" required>
+                <input type="text" id="phone" th:field="*{telephoneNumberOfWinner}" class="form-control" required>
+                <div th:if="${#fields.hasErrors('telephoneNumberOfWinner')}" th:errors="*{telephoneNumberOfWinner}"></div>
             </div>
             <div class="form-group">
                 <label for="email">Почта:</label>
-                <input type="email" id="email" name="prizeEmail" class="form-control" required>
+                <input type="email" id="email" th:field="*{emailOfWinner}" class="form-control" required>
+                <div th:if="${#fields.hasErrors('emailOfWinner')}" th:errors="*{emailOfWinner}"></div>
             </div>
+            <input type="hidden" name="prizeID" th:field="*{id}">
+            <input type="hidden" name="prizeName" th:field="*{nameOfPrize}">
+            <input type="hidden" name="prizeImagePath" th:field="*{path}">
             <button type="submit" class="btn btn-primary">Отправить данные</button>
         </form>
-
     </div>
 </div>
 </body>

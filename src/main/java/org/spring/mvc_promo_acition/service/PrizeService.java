@@ -117,13 +117,7 @@ public class PrizeService {
         return prizeRepository.findById(id).get();
     }
 
-    public void saveOnePrize(Prize prize,
-                             long prizePhone,
-                             String prizeEmail,
-                             String prizeNameOfWinner) {
-        prize.setEmailOfWinner(prizeEmail);
-        prize.setFullNameOfWinner(prizeNameOfWinner);
-        prize.setTelephoneNumberOfWinner(prizePhone);
+    public void saveOnePrize(Prize prize){
         prizeRepository.save(prize);
     }
 }
