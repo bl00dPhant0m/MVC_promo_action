@@ -3,8 +3,7 @@ package org.spring.mvc_promo_acition.controllers;
 import jakarta.validation.Valid;
 import org.spring.mvc_promo_acition.dto.PrizeDTO;
 import org.spring.mvc_promo_acition.dto.PrizeForAdmin;
-import org.spring.mvc_promo_acition.dto.PrizeForUser;
-import org.spring.mvc_promo_acition.entiies.Prize;
+import org.spring.mvc_promo_acition.model.entiies.Prize;
 import org.spring.mvc_promo_acition.repositories.PrizeRepository;
 import org.spring.mvc_promo_acition.service.PrizeService;
 import org.springframework.stereotype.Controller;
@@ -27,6 +26,13 @@ public class PrizeController {
     public PrizeController(PrizeRepository prizeRepository, PrizeService prizeService) {
         this.prizeRepository = prizeRepository;
         this.prizeService = prizeService;
+    }
+
+    @GetMapping("/try-luck")
+    public String tryLuck(Model model) {
+        // You can add attributes to the model if needed
+        model.addAttribute("message", "Попробуйте свою удачу!");
+        return "user/tryLuck"; // Return the name of the HTML template (tryLuck.html)
     }
 
     @GetMapping(value = "/add_prize")

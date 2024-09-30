@@ -2,7 +2,7 @@ package org.spring.mvc_promo_acition.repositories;
 
 import jakarta.transaction.Transactional;
 import org.spring.mvc_promo_acition.dto.PrizeDTO;
-import org.spring.mvc_promo_acition.entiies.Prize;
+import org.spring.mvc_promo_acition.model.entiies.Prize;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -2,7 +2,7 @@ package org.spring.mvc_promo_acition.service;
 
 import jakarta.transaction.Transactional;
 import org.spring.mvc_promo_acition.dto.PrizeDTO;
-import org.spring.mvc_promo_acition.entiies.Prize;
+import org.spring.mvc_promo_acition.model.entiies.Prize;
 import org.spring.mvc_promo_acition.repositories.PrizeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

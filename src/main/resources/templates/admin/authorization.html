@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Authorization</title>
+<!--  <link rel="stylesheet" href="css/admin_panel.css">-->
+  <style>
+    /* admin_panel.css */
+
+    /* Основные стили для всего документа */
+    body {
+      font-family: Arial, sans-serif; /* Шрифт для всего документа */
+      background-color: #f4f4f4; /* Цвет фона страницы */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Высота экрана */
+    }
+
+    h2 {
+      color: #333; /* Цвет заголовка */
+    }
+
+    /* Стили для формы */
+    form {
+      background: #fff; /* Белый фон для формы */
+      padding: 20px;
+      border-radius: 5px; /* Скругление углов */
+      box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Тень вокруг формы */
+      max-width: 400px; /* Максимальная ширина формы */
+      width: 100%;
+    }
+
+    /* Стили для контейнера полей формы */
+    div {
+      margin-bottom: 15px; /* Отступ снизу для полей формы */
+    }
+
+    /* Стили для меток */
+    label {
+      display: block; /* Метки отображаются как блочные элементы */
+      margin-bottom: 5px; /* Отступ снизу для меток */
+      color: #555; /* Цвет текста меток */
+    }
+
+    /* Стили для полей ввода */
+    input[type="text"], input[type="password"] {
+      width: 100%; /* Поля ввода занимают всю ширину контейнера */
+      padding: 10px;
+      border: 1px solid #ccc; /* Серый цвет границы полей */
+      border-radius: 3px; /* Скругление углов полей ввода */
+      box-sizing: border-box; /* Учет границ и отступов в ширину поля */
+    }
+
+    /* Стили для кнопки */
+    button {
+      background-color: #007bff; /* Синий цвет фона кнопки */
+      color: white; /* Цвет текста кнопки */
+      border: none; /* Убрать границу */
+      padding: 10px 20px; /* Отступы внутри кнопки */
+      border-radius: 3px; /* Скругление углов кнопки */
+      cursor: pointer; /* Курсор в виде руки при наведении */
+      font-size: 16px; /* Размер шрифта в кнопке */
+    }
+
+    /* Стили для кнопки при наведении */
+    button:hover {
+      background-color: #0056b3; /* Темнее синий при наведении */
+    }
+
+  </style>
+</head>
+<body>
+<h2>Authorization</h2>
+<form th:action="@{/admin/authorization}" method="post">
+  <div>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+  </div>
+  <div th:if="${errorMessage}" style="color:red;">
+    <p th:text="${errorMessage}"></p>
+  </div>
+  <button type="submit">Login</button>
+</form>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package org.spring.mvc_promo_acition.entiies;
+package org.spring.mvc_promo_acition.model.entiies;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
