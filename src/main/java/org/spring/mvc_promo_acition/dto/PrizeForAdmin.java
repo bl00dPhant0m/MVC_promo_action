@@ -9,12 +9,12 @@ import org.springframework.web.multipart.MultipartFile;
 @Getter
 @Setter
 public class PrizeForAdmin {
-    @NotEmpty(message = "Название приза не должно быть пустым")
+   // @NotEmpty(message = "Название приза не должно быть пустым")
     private String nameOfPrize;
 
-    @NotEmpty(message = "Поле с кодами не должно быть пустым")
+   // @NotEmpty(message = "Поле с кодами не должно быть пустым")
     private String codes;
 
-    @NotNull(message = "Файл не должен быть пустым")
+    //@NotNull(message = "Файл не должен быть пустым")
     private MultipartFile file;
 }

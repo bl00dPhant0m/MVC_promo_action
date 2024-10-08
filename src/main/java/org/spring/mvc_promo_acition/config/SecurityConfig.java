@@ -41,8 +41,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,  "/winners","/admin_panel").authenticated()
                         .requestMatchers(HttpMethod.POST, "/edit_status", "/form-for-winners").authenticated()
 
-                        .requestMatchers(HttpMethod.GET,"/add_prize").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/add_prize").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST,"/add_prize").hasAuthority("ADMIN")
+
                         //.anyRequest().permitAll()
                 );
 

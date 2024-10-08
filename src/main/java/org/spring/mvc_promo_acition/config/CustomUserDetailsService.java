@@ -45,6 +45,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         // Логируем информацию о найденном пользователе для отладки
         log.info("[CustomUserDetailsService] user is {}", admin);
 
+
         // Извлекаем пароль пользователя
         String password = admin.getPassword();
 
@@ -56,6 +57,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         roles.add(new SimpleGrantedAuthority(role));
 
         // Возвращаем объект CustomUserDetails, который используется Spring Security для аутентификации
-        return new CustomUserDetails(username, password, roles);
+        CustomUserDetails customUserDetails = new  CustomUserDetails(username, password, roles);
+        log.info("[CustomUserDetails] user is {}", customUserDetails.getAuthorities());
+        return customUserDetails;
     }
 }
