@@ -23,7 +23,7 @@ import java.util.Optional;
 public class CustomUserDetailsService implements UserDetailsService {
 
     //для преобразования пароля (сам бин находиться в конфигах)
-    private final PasswordEncoder passwordEncoder;
+    //private final PasswordEncoder passwordEncoder;
 
     // Репозиторий для работы с сущностью Admin
     private final AdminRepository adminRepository;

@@ -25,17 +25,17 @@ public class Prize {
 
     private String path;
 
-    @NotNull(message = "ФИО не должно быть пустым")
-    @Pattern(regexp = "^([A-Za-zА-Яа-я]+\\s){2}[A-Za-zА-Яа-я]+$", message = "ФИО должно состоять из трех слов и содержать только буквы")
+    //@NotNull(message = "ФИО не должно быть пустым")
+    //@Pattern(regexp = "^([A-Za-zА-Яа-я]+\\s){2}[A-Za-zА-Яа-я]+$", message = "ФИО должно состоять из трех слов и содержать только буквы")
     private String fullNameOfWinner;
 
-    @NotNull(message = "Номер телефона не должен быть пустым")
-    @Min(value = 89000000000L, message = "Номер телефона должен быть валидным")
-    @Max(value = 89999999999L, message = "Номер телефона должен быть  валидным")
+    //@NotNull(message = "Номер телефона не должен быть пустым")
+    //@Min(value = 89000000000L, message = "Номер телефона должен быть валидным")
+    //@Max(value = 89999999999L, message = "Номер телефона должен быть  валидным")
     private long telephoneNumberOfWinner;
 
-    @Email(message = "Email должен быть валидным")
-    @NotNull(message = "Email не должен быть пустым")
+    //@Email(message = "Email должен быть валидным")
+    //@NotNull(message = "Email не должен быть пустым")
     private String emailOfWinner;
 
     private boolean status;

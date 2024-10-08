@@ -8,6 +8,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,17 +31,19 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         // Открытые маршруты (доступны без авторизации)
-                        .requestMatchers("/", "/promo-code", "/prizes", "/promo-form", "/form-for-winners", "/info", "/rules","/add-admin").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/", "/promo-code", "/prizes", "/promo-form", "/form-for-winners", "/info", "/rules").permitAll()
                         .requestMatchers(HttpMethod.POST, "/add-admin").permitAll()
 
                         // Разрешаем доступ к статическим ресурсам
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
 
                         // Закрытые маршруты (требуют авторизации)
-                        .requestMatchers(HttpMethod.GET,  "/winners").authenticated()
+                        .requestMatchers(HttpMethod.GET,  "/winners","/admin_panel").authenticated()
                         .requestMatchers(HttpMethod.POST, "/edit_status", "/form-for-winners").authenticated()
-                        .requestMatchers(HttpMethod.GET,"/admin_panel","/add_prize").hasRole("ADMIN")
-                        .anyRequest().permitAll()
+
+                        .requestMatchers(HttpMethod.GET,"/add_prize").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/add_prize").hasAuthority("ADMIN")
+                        //.anyRequest().permitAll()
                 );
 
 
@@ -48,6 +51,7 @@ public class SecurityConfig {
         http.cors(AbstractHttpConfigurer::disable); // Отключение настройки CORS
         http.csrf(AbstractHttpConfigurer::disable); // Отключение защиты от CSRF(подмена email итп) уже вкл с версии 4
         http.headers(AbstractHttpConfigurer::disable); // Отключение настройки заголовков
+        
 
         // Конфигурация страницы входа
         http.formLogin(login -> login
@@ -63,6 +67,9 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/admin/authorization") // URL после успешного выхода
                 .permitAll() // Разрешить доступ к выходу из системы всем
         );
+
+
+
 
         // Включение базовой аутентификации
         http.httpBasic(Customizer.withDefaults()); // Использование базовой HTTP-аутентификации по умолчанию

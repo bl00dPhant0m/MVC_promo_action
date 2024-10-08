@@ -10,10 +10,8 @@ import java.util.List;
 public class CustomUserDetails implements UserDetails {
     // Имя пользователя
     private final String username;
-
     // Пароль пользователя
     private final String password;
-
     // Список ролей или прав пользователя
     private final List<GrantedAuthority> roles;
 
@@ -23,19 +21,16 @@ public class CustomUserDetails implements UserDetails {
         this.password = password;
         this.roles = roles;
     }
-
     // Возвращает коллекцию прав (ролей) пользователя
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles;
     }
-
     // Возвращает пароль пользователя
     @Override
     public String getPassword() {
         return this.password;
     }
-
     // Возвращает имя пользователя (логин)
     @Override
     public String getUsername() {
